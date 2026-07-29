@@ -162,21 +162,41 @@ export const ContactsTable = forwardRef<HTMLInputElement>((_, searchRef) => {
 });
 ContactsTable.displayName = 'ContactsTable';
 
-function Row({ record, onDelete }: { record: ContactRecord; onDelete: () => void }) {
+function Row({
+  record,
+  onDelete,
+}: {
+  record: ContactRecord;
+  onDelete: () => void;
+}) {
   return (
     <tr className="border-b border-slate-700/60 hover:bg-slate-800/40">
-      <td className="px-4 py-3 text-slate-200">{record.name}</td>
-      <td className="px-4 py-3 font-mono text-slate-300">{record.cleanedPhone ?? record.originalPhone || '—'}</td>
-      <td className="px-4 py-3 text-slate-400">{record.city || '—'}</td>
+      <td className="px-4 py-3 text-slate-200">
+        {record.name}
+      </td>
+
+      <td className="px-4 py-3 font-mono text-slate-300">
+        {(record.cleanedPhone ?? record.originalPhone) || "—"}
+      </td>
+
+      <td className="px-4 py-3 text-slate-400">
+        {record.city || "—"}
+      </td>
+
       <td className="px-4 py-3">
         <StatusBadge status={record.status} />
       </td>
+
       <td className="px-4 py-3 text-right">
-        <Button variant="ghost" size="icon" onClick={onDelete} title="Remove row">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onDelete}
+          title="Remove row"
+        >
           <Trash2 className="h-4 w-4 text-slate-500 hover:text-red-400" />
         </Button>
       </td>
     </tr>
   );
 }
-table/ContactsTable.tsx
